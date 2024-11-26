@@ -60,6 +60,7 @@ Have a good day."""
 
         Args:
             person (Person): the Person we want to send the email to.
+            gifted_person (Person): the Person `person` should make a gift to.
         """
         assert (
             self.session is not None
