@@ -33,7 +33,7 @@ class EmailConnector:
 
 You have to make a gift to PLACEHOLDER_RCV.
 This email was sent with the help of the smtplib library.
-Checkout the GitHub repo: github.com/link/to/repo.
+Checkout the GitHub repo for this Julklap generator here: github.com/jona-sch/julklap.
 
 Have a good day."""
 
