@@ -75,7 +75,7 @@ class TestGroup(unittest.TestCase):
         # 5 people
         group = Group(
             {self.p1, self.p2, self.p3, self.p4, self.p5},
-            [(self.p1, self.p2), (self.p1, self.p3), (self.p4, self.p5)]
+            [(self.p1, self.p2), (self.p1, self.p3), (self.p4, self.p5)],
         )
         matches = group.create_matches()
         self._validate_matches(matches, group)
@@ -89,7 +89,12 @@ class TestGroup(unittest.TestCase):
         # 5 people
         group = Group(
             {self.p1, self.p2, self.p3, self.p4, self.p5},
-            [(self.p1, self.p2), (self.p2, self.p3), (self.p4, self.p3), (self.p4, self.p5)]
+            [
+                (self.p1, self.p2),
+                (self.p2, self.p3),
+                (self.p4, self.p3),
+                (self.p4, self.p5),
+            ],
         )
         matches = group.create_matches()
         print(matches)
@@ -103,4 +108,9 @@ class TestGroup(unittest.TestCase):
         self.assertSetEqual(set(m[0] for m in matches), group.people)
         self.assertSetEqual(set(m[1] for m in matches), group.people)
         self.assertTrue(all(m[0] != m[1] for m in matches))
-        self.assertTrue(all(all({m0, m1} != {p1, p2} for m0, m1 in matches) for p1, p2 in group.exclusions))
+        self.assertTrue(
+            all(
+                all({m0, m1} != {p1, p2} for m0, m1 in matches)
+                for p1, p2 in group.exclusions
+            )
+        )

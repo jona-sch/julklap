@@ -25,16 +25,18 @@ class TestJulklap(unittest.TestCase):
         p4 = Person("4Jerome", "jerome@gmail.com")
         p5 = Person("5Jan", "jan@gmail.com")
         group = Group(
-            {p1, p2, p3, p4, p5},
-            [[p1, p3], [p1, p4], [p2, p4], [p2, p5], [p3, p5]]
-        )  # these exclusion guarantee that the only solution is p1->p2->p3->p4->p5.
+            {p1, p2, p3, p4, p5}, [[p1, p3], [p1, p4], [p2, p4], [p2, p5], [p3, p5]]
+        )
+        # these exclusion guarantee that the only solution is p1->p2->p3->p4->p5
+        # or p5->p4->p3->p2->p1->p5
         email_connector = mockito.mock(EmailConnector)
-        mockito.expect(email_connector, times=1).__enter__(...).thenReturn(email_connector)
-        mockito.expect(email_connector, times=1).send_email(p1, p2)
-        mockito.expect(email_connector, times=1).send_email(p2, p3)
-        mockito.expect(email_connector, times=1).send_email(p3, p4)
-        mockito.expect(email_connector, times=1).send_email(p4, p5)
-        mockito.expect(email_connector, times=1).send_email(p5, p1)
+        mockito.expect(email_connector, times=1).__enter__(...).thenReturn(
+            email_connector
+        )
+        for m1, m2 in [[p1, p2], [p2, p3], [p3, p4], [p4, p5], [p5, p1]]:
+            mockito.expect(email_connector, times=1).send_email(
+                mockito.matchers.or_(m1, m2), mockito.matchers.or_(m1, m2)
+            )
         mockito.expect(email_connector, times=1).__exit__(...)
 
         julklap = Julklap(group, email_connector)

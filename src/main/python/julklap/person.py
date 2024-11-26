@@ -22,7 +22,7 @@ class Person:
         if self.name == None or self.name == "":
             raise ValueError(f"You should enter a name for your Person.")
 
-    def __eq__(self, other: "Person") -> bool:
+    def __eq__(self, other: object) -> bool:
         """Overrides the default implementation"""
         if isinstance(other, Person):
             return self.name == other.name

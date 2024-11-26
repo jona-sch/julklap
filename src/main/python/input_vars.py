@@ -9,10 +9,8 @@ sender_password = "password"
 persons = {
     Person("Jan", "jan@mail.com"),
     Person("Luo", "luo@mail.com"),
-    Person("Kid", "kid@mail.com")
+    Person("Kid", "kid@mail.com"),
 }
 
 # Modify to add the different persons in your group
-exclusions = [
-    (Person("Jan", "jan@mail.com"), Person("Luo", "luo@mail.com"))
-]
+exclusions = [(Person("Jan", "jan@mail.com"), Person("Luo", "luo@mail.com"))]

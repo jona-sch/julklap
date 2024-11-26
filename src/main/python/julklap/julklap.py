@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
 from datetime import datetime
+import logging
 
 from julklap.group import Group
 from julklap.email_connector import EmailConnector

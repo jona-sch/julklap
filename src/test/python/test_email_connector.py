@@ -19,10 +19,7 @@ class TestEmailConnector(unittest.TestCase):
         Test init functions of the EmailConnector class.
         """
         # Test basic param setting
-        connector = EmailConnector(
-            "jean@gmail.com",
-            "password"
-        )
+        connector = EmailConnector("jean@gmail.com", "password")
         self.assertEqual(connector.sender_address, "jean@gmail.com")
         self.assertEqual(connector.sender_password, "password")
         self.assertEqual(connector.session, None)
@@ -32,10 +29,7 @@ class TestEmailConnector(unittest.TestCase):
         Test __enter__, __exit__ functions of the EmailConnector class.
         """
         # Test basic param setting
-        connector = EmailConnector(
-            "jean@gmail.com",
-            "password"
-        )
+        connector = EmailConnector("jean@gmail.com", "password")
         mockito.expect(smtplib.SMTP, times=1).starttls()
         mockito.expect(smtplib.SMTP, times=1).login("jean@gmail.com", "password")
         mockito.expect(smtplib.SMTP, times=1).quit()
@@ -53,20 +47,19 @@ class TestEmailConnector(unittest.TestCase):
         santa = Person("Santa Claus", "santa@claus.de")
         kid = Person("Kiddo", "dad@work.com")
         kid2 = Person("Alfred", "dad@work.com")
-        connector = EmailConnector(
-            "jean@gmail.com",
-            "password"
-        )
+        connector = EmailConnector("jean@gmail.com", "password")
         mockito.expect(smtplib.SMTP, times=1).starttls()
         mockito.expect(smtplib.SMTP, times=1).login("jean@gmail.com", "password")
         mockito.expect(smtplib.SMTP, times=1).quit()
         mockito.expect(smtplib.SMTP, times=1).sendmail(
-            "jean@gmail.com", "santa@claus.de",
-            mockito.matchers.arg_that(lambda mime: "Kiddo" in mime)
+            "jean@gmail.com",
+            "santa@claus.de",
+            mockito.matchers.arg_that(lambda mime: "Kiddo" in mime),
         )
         mockito.expect(smtplib.SMTP, times=1).sendmail(
-            "jean@gmail.com", "santa@claus.de",
-            mockito.matchers.arg_that(lambda mime: "Alfred" in mime)
+            "jean@gmail.com",
+            "santa@claus.de",
+            mockito.matchers.arg_that(lambda mime: "Alfred" in mime),
         )
         with connector as c:
             c.send_email(santa, kid)

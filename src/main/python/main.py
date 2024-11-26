@@ -1,8 +1,9 @@
 import logging
 import random as rd
 from julklap.julklap import Julklap
-from input_vars import *
 from julklap.email_connector import EmailConnector
+from julklap.group import Group
+from input_vars import persons, exclusions, sender_email, sender_password
 
 
 rd.seed()

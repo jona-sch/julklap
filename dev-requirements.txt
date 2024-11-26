@@ -1,3 +1,4 @@
 pytest
 mockito
 black
+mypy

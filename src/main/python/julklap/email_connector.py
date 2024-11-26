@@ -50,8 +50,9 @@ Have a good day."""
         return self
 
     def __exit__(self, exc_type, exc_val, exc_tb) -> None:
-        self.session.quit()
-        self.session = None
+        if self.session is not None:
+            self.session.quit()
+            self.session = None
 
     def send_email(self, person: Person, gifted_person: Person) -> None:
         """
@@ -60,11 +61,19 @@ Have a good day."""
         Args:
             person (Person): the Person we want to send the email to.
         """
+        assert (
+            self.session is not None
+        ), "You need to use the e-mail connector using `with`."
         message = MIMEMultipart()
         message["From"] = self.sender_address
         message["To"] = person.email
         message["Subject"] = self.subject
         message.attach(
-            MIMEText(self.message.replace("PLACEHOLDER_RCV", gifted_person.name).replace("PLACEHOLDER_SDR", person.name), "plain")
+            MIMEText(
+                self.message.replace("PLACEHOLDER_RCV", gifted_person.name).replace(
+                    "PLACEHOLDER_SDR", person.name
+                ),
+                "plain",
+            )
         )
         self.session.sendmail(self.sender_address, person.email, message.as_string())

@@ -63,7 +63,7 @@ class Group:
                 return False
         return True
 
-    def _create_matches_with_exclusion_brute_force(self) -> List[Tuple[Person]]:
+    def _create_matches_with_exclusion_brute_force(self) -> List[Tuple[Person, Person]]:
         """
         Create matches between people of the group when there are no exclusions.
 
@@ -74,8 +74,8 @@ class Group:
             NoPossibleJulklapMappingError: if it isn't possible to find a Julklap combination.
         """
         for shuffled_people in permutations(self.people):
-            if self._validate_shuffled_people(shuffled_people):
-                matches: List[Tuple[Person]] = []
+            if self._validate_shuffled_people(list(shuffled_people)):
+                matches: List[Tuple[Person, Person]] = []
                 for i in range(len(self.people) - 1):
                     matches.append((shuffled_people[i], shuffled_people[i + 1]))
                 matches.append((shuffled_people[-1], shuffled_people[0]))
@@ -84,7 +84,7 @@ class Group:
             f"Exclusions prevent creation of a Julklap combination: exclusions={self.exclusions}, people={self.people}"
         )
 
-    def create_matches(self) -> List[Tuple[Person]]:
+    def create_matches(self) -> List[Tuple[Person, Person]]:
         """
         Create matches between people of the group.
 
