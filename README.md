@@ -28,7 +28,7 @@ You will need a virtualenv where you will install the `dev-requirements.txt`.
 
 ### UT
 
-For UTs, you should first `export PYTHONATH=src/main/python`.
+For UTs, you should first `export PYTHONPATH=src/main/python`.
 They are based on pytest, simply run `pytest`.
 
 ### Linting
