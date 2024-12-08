@@ -1,0 +1,13 @@
+version: "3.8"
+
+services:
+  client:
+    container_name: julklap-react
+    restart: unless-stopped
+    env_file: .env
+    ports:
+      - "1337:80"
+    networks:
+      - my-network
+    links:
+      - api
