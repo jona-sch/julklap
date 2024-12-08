@@ -1,0 +1,38 @@
+{
+    "group": {
+        "people": [
+            {
+                "name": "Jake",
+                "email": "jake@mail.com"
+            },
+            {
+                "name": "John",
+                "email": "john@mail.com"
+            },
+            {
+                "name": "Jerry",
+                "email": "jerry@mail.com"
+            },
+            {
+                "name": "Julian",
+                "email": "julian@mail.com"
+            }
+        ],
+        "exclusions": [
+            [
+                {
+                    "name": "Jake",
+                    "email": "jake@mail.com"
+                },
+                {
+                    "name": "John",
+                    "email": "john@mail.com"
+                }
+            ]
+        ]
+    },
+    "email_connector_model": {
+        "sender_address": "john@mail.com",
+        "sender_password": "abcd-1234-grfe-9586"
+    }
+}

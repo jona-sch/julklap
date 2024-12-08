@@ -3,12 +3,14 @@ from itertools import permutations
 from typing import List, Set, Tuple
 import random
 
+from pydantic import BaseModel
+
 from julklap.person import Person
 from julklap.exceptions import NoPossibleJulklapMappingError
 
 
 @dataclass
-class Group:
+class Group(BaseModel):
     """
     Represents a group of people.
     """
