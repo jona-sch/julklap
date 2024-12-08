@@ -1,11 +1,13 @@
 from dataclasses import dataclass
 import json
 
+from pydantic import BaseModel
+
 from julklap.utils import validate_email_address
 
 
 @dataclass(frozen=True)
-class Person:
+class Person(BaseModel):
     """
     Represents a person: we only need a name and an email address.
     """

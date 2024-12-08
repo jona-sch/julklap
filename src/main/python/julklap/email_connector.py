@@ -4,6 +4,8 @@ from email.mime.text import MIMEText
 import smtplib
 from typing import Final, Optional
 
+from pydantic import BaseModel
+
 from julklap.utils import validate_email_address
 from julklap.person import Person
 

@@ -1,20 +1,37 @@
 import logging
 import random as rd
+
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from julklap.julklap import Julklap
-from julklap.email_connector import EmailConnector
-from julklap.group import Group
-from input_vars import persons, exclusions, sender_email, sender_password
+from julklap.exceptions import NoPossibleJulklapMappingError
 
 
 rd.seed()
 
-if __name__ == "__main__":
-    logging.getLogger(__name__).info("Processing input variables...")
-    group = Group(persons, exclusions)
-    email_connector = EmailConnector(sender_email, sender_password)
-    julklap = Julklap(group, email_connector)
+app = FastAPI()
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"]
+)
+
+@app.get("/")
+def homepage():
+    return {"message": "Welcome to the homepage"}
+
+
+@app.post("/julklap")
+def post_julklap(julklap: Julklap):
     logging.getLogger(__name__).info("Computing Julklap matching and sending emails...")
-    julklap.compute_julklap()
-
+    try:
+        julklap.compute_julklap()
+    except NoPossibleJulklapMappingError:
+        return {"message": "No possible Julklap matchup found for this group."}
+    except ValueError as exc:
+        return {"message": f"Problem with input: {exc}."}
     logging.getLogger(__name__).info("All done.")
+    return {"message": "All done. E-mails have been sent out !"}
