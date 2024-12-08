@@ -26,6 +26,10 @@ It allows you to generate a Julklap (Secret Santa) among a group of friends.
 7. Launch the React front-end: `cd julklap-app` and `yarn start`
 8. Go to http://localhost:3000 and create your Julklap !
 
+## How it looks
+
+![alt text](image.png)
+
 ## Dev
 
 You will need a virtualenv where you will install the `dev-requirements.txt`.
