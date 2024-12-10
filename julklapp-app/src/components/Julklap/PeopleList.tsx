@@ -61,7 +61,7 @@ const PeopleList = ({
                             </tr>)
                         } else {
                             return (<tr key={index}>
-                                <th> {`${person.name}`} </th>
+                                <th> {`> ${person.name}`} </th>
                                 <th> {`${person.email}`} </th>
                                 <th style={{textAlign: 'right'}}>
                                     <button className="button-18" onClick={() => {unselectPerson(); removePerson(index);}}>Remove</button>
