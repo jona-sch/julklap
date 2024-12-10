@@ -14,9 +14,13 @@ const AddPerson = ({
 
     const addSinglePerson = () => {
         if (personName && personEmail) {
-            addPerson({ name: personName, email: personEmail });
-            setName('');
-            setEmail('');
+            if (/\S+@\S+\.\S+/.test(personEmail)) {
+                addPerson({ name: personName, email: personEmail });
+                setName('');
+                setEmail('');
+            } else {
+                alert("Put in a correct e-mail address please.");
+            }
         }
     };
 
@@ -44,9 +48,9 @@ const AddPerson = ({
                             </th>
                             <th>
                                 <input 
-                                    type="text" 
+                                    type="email" 
                                     value={personEmail} 
-                                    onChange={(e) => setEmail(e.target.value)} 
+                                    onChange={(e) => setEmail(e.target.value)}
                                 />
                             </th>
                         </tr>
@@ -56,7 +60,11 @@ const AddPerson = ({
                     className="button-18"
                     type="button"
                     onClick={addSinglePerson}
-                    disabled={!personName || !personEmail}
+                    disabled={
+                        !personName ||
+                        !personEmail ||
+                        !/\S+@\S+\.\S+/.test(personEmail)
+                    }
                 >
                     <b>Add Person</b>
                 </button>

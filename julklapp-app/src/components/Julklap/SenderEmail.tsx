@@ -15,7 +15,11 @@ const SenderEmail = ({
 
     const addEmailSender = () => {
         if (emailConnectorAddress && emailConnectorPassword) {
-            setEmailConnector( { address: emailConnectorAddress, password: emailConnectorPassword });
+            if (/\S+@\S+\.\S+/.test(emailConnectorAddress)) {
+                setEmailConnector( { address: emailConnectorAddress, password: emailConnectorPassword });
+            } else {
+                alert("Put in a correct e-mail address please.");
+            }
         }
     };
 
@@ -55,7 +59,11 @@ const SenderEmail = ({
                     className="button-18"
                     type="button"
                     onClick={addEmailSender}
-                    disabled={!emailConnectorAddress || !emailConnectorPassword}
+                    disabled={
+                        !emailConnectorAddress ||
+                        !emailConnectorPassword||
+                        !/\S+@\S+\.\S+/.test(emailConnectorAddress)
+                    }
                 >
                     <b>Add Sender</b>
                 </button>

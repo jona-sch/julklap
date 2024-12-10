@@ -1,6 +1,7 @@
 // src/ItemListForm.js
 import React from 'react';
 import { Person } from './types';
+import ExclusionsListElement from './ExclusionsListElement';
 
 export interface PeopleListProps {
     exclusions: Person[][];
@@ -21,13 +22,11 @@ const ExclusionsList = ({
             <table>
                 <tbody>
                     {exclusions.map((match, index) => (
-                        <tr key={index}>
-                            <th>{`${match[0].name}`}</th>
-                            <th>{`${match[1].name}`}</th>
-                            <th style={{textAlign: 'right'}}>
-                                <button className="button-18" onClick={() => removeExclusion(index)}>Remove</button>
-                            </th>
-                        </tr>
+                        <ExclusionsListElement
+                            index={ index }
+                            match={ match }
+                            removeExclusion={ removeExclusion }    
+                        />
                     ))} 
                 </tbody>
             </table>
