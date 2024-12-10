@@ -111,6 +111,7 @@ body {
   overflow-x: hidden;
   word-break: break-word;
   overflow-wrap: break-word;
+  padding-top: 3rem;
 }
 
 /* Make the header bg full width, but the content inline with body */
@@ -146,8 +147,8 @@ h3 {
   line-height: 1.1;
 }
 
-/* Format navigation */
-nav {
+/* Format navigation
+/* nav {
   font-size: 1rem;
   line-height: 2;
   padding: 1rem 0;
@@ -171,7 +172,7 @@ nav a:hover {
 
 nav a.current:hover {
   text-decoration: none;
-}
+} */
 
 footer {
   margin-top: 4rem;
@@ -384,8 +385,8 @@ input[type="radio"]:enabled:hover {
 
 .button-18:disabled { 
   cursor: not-allowed;
-  background: rgba(0, 0, 0, .08);
-  color: rgba(0, 0, 0, .3);
+  background: #796869;
+  color: #473e3f;
 }
 
 /* CSS */
@@ -430,8 +431,8 @@ input[type="radio"]:enabled:hover {
 
 .button-julklap:disabled { 
   cursor: not-allowed;
-  background: #b4212a;
-  color: #b4212a;
+  background: #796869;
+  color: #473e3f;
 }
 
 /* Format the expanding box */
@@ -472,7 +473,7 @@ td,
 th {
   border: 0px solid var(--border);
   text-align: left;
-  padding: 0.5rem;
+  padding: 0.0rem;
 }
 
 th {
